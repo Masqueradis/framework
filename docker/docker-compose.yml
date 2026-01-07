@@ -2,7 +2,7 @@ services:
   php:
     build: 
       context: ..
-      dockerfile: docker/php/Dockerfile.php
+      dockerfile: docker/php/Dockerfile
     container_name: ${PROJECT_NAME}_php
     volumes:
       - ../app:/var/www/html
@@ -12,7 +12,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: nginx/Dockerfile.nginx
+      dockerfile: nginx/Dockerfile
     container_name: ${PROJECT_NAME}_nginx
     ports:
     - "${APP_PORT}:80"
