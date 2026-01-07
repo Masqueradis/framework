@@ -33,5 +33,5 @@ services:
       - ${PROJECT_NAME}
 
 networks:
-  DockerTask:
+  FrameworkTask:
     driver: bridge
