@@ -1,0 +1,2 @@
+country,city,isActive,gender,birthDate,salary,hasChildren,familyStatus,registrationDate
+Germany,Berlin,TRUE,Male,2005-11-22,1,FALSE,Unmarried,2026-01-07

@@ -1,17 +1,21 @@
 DOCKER_COMPOSE=docker compose -f docker/docker-compose.yml --env-file docker/.env
 
-.PHONY: start stop install terminal ps
+.PHONY: start stop install terminal ps restart
 
-start:
+up:
 	${DOCKER_COMPOSE} up -d 
 
-stop:
+down:
 	${DOCKER_COMPOSE} down 
 
-install:
+restart:
+	${DOCKER_COMPOSE} down 
+	${DOCKER_COMPOSE} up -d
+
+build:
 	${DOCKER_COMPOSE} build
 
-terminal:
+bash:
 	${DOCKER_COMPOSE} exec php bash
 
 ps:
