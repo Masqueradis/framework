@@ -6,30 +6,33 @@ $host = 'db';
 $dbname = 'app_db';
 $port = 5432;
 
-$dbh = new PDO('pgsql:host=localhost;dbname=test', $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+$dbh = new PDO('pgsql:host=FrameworkTask_db;dbname=app_db', 'user', 'root');
 
 $filename = 'Example.csv';
-$data = [];
 
-$handle = fopen($filename, 'r');
-$headers = fgetcsv($handle, 1000, ',', '"', '\\');
+$file = fopen($filename, 'r');
+$headers = fgetcsv($file, 1000, ',', '"', '\\');
 
-while (($row = fgetcsv($handle, 1000, ',', '"', '\\')) !== FALSE) {
-    $rowData = array_combine($headers, $row);
+$sql = 'INSERT INTO users (country, city, is_active, gender, birth_date, salary, has_children, family_status, registration_date) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+$stmt = $dbh->prepare($sql);
 
-    $data[] = [
-        'country' => $rowData['country'],
-        'city' => $rowData['city'],
-        'isActive' => filter_var($rowData['isActive'], FILTER_VALIDATE_BOOLEAN),
-        'gender' => $rowData['gender'],
-        'birthDate' => DateTime::createFromFormat('Y-m-d', $rowData['birthDate']),
-        'salary' => $rowData['salary'],
-        'hasChildren' => filter_var($rowData['hasChildren'], FILTER_VALIDATE_BOOLEAN),
-        'familyStatus' => $rowData['familyStatus'],
-        'registrationDate' => DateTime::createFromFormat('Y-m-d', $rowData['birthDate'])
+
+while (($row = fgetcsv($file, 1000, ',', '"', '\\')) !== FALSE) {
+    $params = [
+        $row[0],
+        $row[1],
+        strtoupper($row[2]) === 'TRUE' ? 1 : 0,
+        $row[3],
+        $row[4],
+        strtoupper($row[5]) === 'TRUE' ? 1 : 0,
+        $row[6],
+        $row[7],
+        $row[8],
     ];
+    $stmt->execute($params);
+
+    echo 'Added record: '. $row[0] . ','. $row[1] . PHP_EOL;
 }
 
-fclose($handle);
-
-print_r($data);
+fclose($file);
