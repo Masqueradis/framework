@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-$host = 'db';
-$dbname = 'app_db';
-$port = 5432;
-
 $dbh = new PDO('pgsql:host=FrameworkTask_db;dbname=app_db', 'user', 'root');
 
 $filename = 'Example.csv';
