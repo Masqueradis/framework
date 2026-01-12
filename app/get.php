@@ -7,22 +7,22 @@ $dbh = new PDO('pgsql:host=FrameworkTask_db;dbname=app_db', 'user', 'root');
 $conditions = [];
 $params = [];
 
-if (!empty($_GET['country'])) {
+if (isset($_GET['country'])) {
     $conditions[] = 'country = ?';
     $params[] = $_GET['country']; 
 }
 
-if (!empty($_GET['city'])) {
+if (isset($_GET['city'])) {
     $conditions[] = 'city = ?';
     $params[] = $_GET['city']; 
 }
 
-if (!empty($_GET['gender'])) {
+if (isset($_GET['gender'])) {
     $conditions[] = 'gender = ?';
     $params[] = $_GET['gender']; 
 }
 
-if (!empty($_GET['family_status'])) {
+if (isset($_GET['family_status'])) {
     $conditions[] = 'family_status = ?';
     $params[] = $_GET['family_status']; 
 }
@@ -37,32 +37,32 @@ if (isset($_GET['has_children']) && $_GET['has_children'] !== '') {
     $params[] = ($_GET['has_children'] == '1' || strtoupper($_GET['has_children']) == 'TRUE') ? 1 : 0;
 }
 
-if (!empty($_GET['birth_date_from'])) {
+if (isset($_GET['birth_date_from'])) {
     $conditions[] = 'birth_date >= ?';
     $params[] = $_GET['birth_date_from'];
 }
 
-if (!empty($_GET['birth_date_to'])) {
+if (isset($_GET['birth_date_to'])) {
     $conditions[] = 'birth_date <= ?';
     $params[] = $_GET['birth_date_to'];
 }
 
-if (!empty($_GET['registration_date_from'])) {
+if (isset($_GET['registration_date_from'])) {
     $conditions[] = 'registration_date >= ?';
     $params[] = $_GET['registration_date_from'];
 }
 
-if (!empty($_GET['registration_date_to'])) {
+if (isset($_GET['registration_date_to'])) {
     $conditions[] = 'registration_date <= ?';
     $params[] = $_GET['registration_date_to'];
 }
 
-if (!empty($_GET['salary_from'])) {
+if (isset($_GET['salary_from'])) {
     $conditions[] = 'salary >= ?';
     $params[] = $_GET['salary_from'];
 }
 
-if (!empty($_GET['salary_to'])) {
+if (isset($_GET['salary_to'])) {
     $conditions[] = 'salary <= ?';
     $params[] = $_GET['salary_to'];
 }
